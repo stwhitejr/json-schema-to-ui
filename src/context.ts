@@ -1,7 +1,7 @@
 import {createContext, useContext} from 'react';
 import {JsonToUiProps} from './JsonToUi';
 
-type JsonToUiContextValue = JsonToUiProps;
+type JsonToUiContextValue = JsonToUiProps<{}>;
 
 // @ts-ignore
 export const JsonToUiContext = createContext<JsonToUiContextValue>({});
