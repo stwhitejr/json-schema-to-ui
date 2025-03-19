@@ -8,6 +8,7 @@ import {set, unset, get} from 'lodash';
 
 const Container = (props) => (
   <div
+    data-testid={props.id}
     style={{
       ...props.schema?.ui?.styles,
       padding: '10px',
@@ -29,7 +30,7 @@ const Label = (props: {fieldName: string}) => (
 const StringComponent = (props) => {
   const {onChange} = useJsonToUiContext();
   return (
-    <Container>
+    <Container id="StringComponent">
       <Label fieldName={props.fieldName} />
       <input
         type="string"
@@ -44,9 +45,10 @@ const StringComponent = (props) => {
 const BooleanComponent = (props) => {
   const {onChange} = useJsonToUiContext();
   return (
-    <Container>
+    <Container id="BooleanComponent">
       <Label fieldName={props.fieldName} />
       <input
+        title={props.fieldName}
         type="checkbox"
         name={props.fieldName}
         checked={props.value}
@@ -58,7 +60,7 @@ const BooleanComponent = (props) => {
 const NumberComponent = (props) => {
   const {onChange} = useJsonToUiContext();
   return (
-    <Container>
+    <Container id="NumberComponent">
       <Label fieldName={props.fieldName} />
       <input
         type="number"
@@ -74,7 +76,7 @@ const NumberComponent = (props) => {
 const ObjectComponent = (props) => {
   const {onChange} = useJsonToUiContext();
   return (
-    <Container isComplexType schema={props.schema}>
+    <Container id="ObjectComponent" isComplexType schema={props.schema}>
       <Label fieldName={props.fieldName} />
       <div>{props.children}</div>
       <div style={{paddingTop: '5px'}}>
@@ -92,7 +94,7 @@ const ObjectComponent = (props) => {
 const ArrayComponent = (props) => {
   const {onChange} = useJsonToUiContext();
   return (
-    <Container isComplexType>
+    <Container id="ArrayComponent" isComplexType>
       <Label fieldName={props.fieldName} />
       <div>{props.children}</div>
       <div style={{paddingTop: '5px'}}>
@@ -108,7 +110,7 @@ const ArrayComponent = (props) => {
 const ArrayItemComponent = (props) => {
   const {onDelete} = useJsonToUiContext();
   return (
-    <Container>
+    <Container id="ArrayItemComponent">
       <button onClick={() => onDelete(props.path)}>Delete Item</button>
       <div>{props.children}</div>
     </Container>
@@ -116,7 +118,7 @@ const ArrayItemComponent = (props) => {
 };
 const NullComponent = (props) => {
   return (
-    <Container>
+    <Container id="NullComponent">
       <Label fieldName={props.fieldName} />
       <span>null</span>
     </Container>
@@ -124,11 +126,15 @@ const NullComponent = (props) => {
 };
 
 const Dropdown = (props) => {
+  const {onChange} = useJsonToUiContext();
   const options = props.schema.ui.options;
   return (
-    <Container>
+    <Container id="Dropdown">
       <Label fieldName={props.fieldName} />
-      <select name={props.fieldName}>
+      <select
+        name={props.fieldName}
+        onChange={({target: {value}}) => onChange(props.path, value)}
+      >
         {options.map((item) => (
           <option key={item} value={item}>
             {item}
@@ -166,7 +172,7 @@ const Basic = (props) => {
     } else {
       const handler = setTimeout(() => {
         props.onChange(value);
-      }, 500);
+      }, 250);
       return () => {
         clearTimeout(handler);
       };
@@ -247,7 +253,7 @@ const meta: Meta<typeof Basic> = {
 export default meta;
 type Story = StoryObj<typeof Basic>;
 
-export const FirstStory: Story = {
+export const Demo: Story = {
   args: {
     value: {
       id: 1,
@@ -272,7 +278,7 @@ export const FirstStory: Story = {
       ],
     },
     onChange(value) {
-      console.log('onChange callback', value);
+      console.log(value);
     },
   },
 };

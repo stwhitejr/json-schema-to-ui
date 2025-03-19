@@ -29,15 +29,15 @@ const JsonToUiTraverse = ({
           schema,
           path,
         };
-        const content = <JsonToUiSwitch key={key} {...contentProps} />;
+        const content = <JsonToUiSwitch key={path} {...contentProps} />;
         if (Wrapper) {
           return (
-            <Wrapper key={key} {...contentProps}>
+            <Wrapper key={path} {...contentProps}>
               {content}
             </Wrapper>
           );
         }
-        return <>{content}</>;
+        return content;
       })}
     </>
   );
