@@ -1,10 +1,14 @@
-import {capitalize} from '@mui/material';
-import {useJsonToUiContext} from '@root/context';
-import JsonToUi from '@root/JsonToUi';
+import {useJsonToUiContext} from '../context';
+import JsonToUi from '../index';
 import type {Meta, StoryObj} from '@storybook/react';
 import {produce} from 'immer';
 import {useEffect, useRef, useState} from 'react';
 import {set, unset, get} from 'lodash';
+
+const capitalize = (string: string) => {
+  const [firstLetter, ...rest] = string.split('');
+  return `${firstLetter.toUpperCase()}${rest.join('')}`;
+};
 
 const Container = (props) => (
   <div
