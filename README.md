@@ -16,4 +16,4 @@ The goal is to streamline entity creation and management through a self service 
 
 ## Demo
 
-[Go To Stories](https://github.com/stwhitejr/json-schema-to-ui/tree/main/src/stories)
+[Go To Stories](https://stwhitejr.github.io/json-schema-to-ui/?path=/story/stories-basic--demo)

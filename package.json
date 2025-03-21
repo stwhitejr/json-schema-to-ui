@@ -5,7 +5,10 @@
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
   "type": "module",
-  "repository": "git@github.com:stwhitejr/json-schema-to-ui.git",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stwhitejr/json-schema-to-ui.git"
+  },
   "exports": {
     "import": "./dist/index.esm.js",
     "require": "./dist/index.js"
