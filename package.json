@@ -1,6 +1,6 @@
 {
   "name": "json-schema-to-ui",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
@@ -16,9 +16,10 @@
   "scripts": {
     "build": "rollup -c",
     "prepublishOnly": "npm run build",
+    "release": "npm version patch && git push && git push --tags",
     "lint": "eslint src --ext .ts,.tsx",
     "format": "prettier --write src",
-    "test": "jest --watch",
+    "test": "jest",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },
